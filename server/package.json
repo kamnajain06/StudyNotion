@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "npm install",
     "dev": "nodemon index.js"
   },
   "keywords": [],
@@ -21,7 +22,7 @@
     "dotenv": "^16.4.5",
     "email-validator": "^2.0.4",
     "etag": "^1.8.1",
-    "express": "^4.19.1",
+    "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
     "express-middleware": "^3.4.2",
     "jsonwebtoken": "^9.0.2",
