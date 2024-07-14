@@ -13,7 +13,7 @@ const {sendOTP, login, signup, changePassword} = require("../controllers/Auth");
 const {
     resetPasswordToken,
     resetPassword,
-  } = require("../controllers/ResetPassword")
+  } = require("../controllers/resetPassword")
 
 const {auth} = require("../middleware/auth");
 const { uploadFile} = require("../controllers/uploadFile");
