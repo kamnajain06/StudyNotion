@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin:"https://study-notion-edtech-three.vercel.app/",
+        origin:"http://localhost:3000",
         credentials: true,
     })
 );
