@@ -17,8 +17,7 @@ import { FaAngleDown } from 'react-icons/fa';
 import ReviewSlider from '../Components/common/ReviewSlider';
 import CourseCard from '../Components/Core/CategoryPage/CourseCard';
 import Footer from '../Components/common/Footer';
-import { ACCOUNT_TYPE } from '../utils/constants';
-import toast from 'react-hot-toast';
+import { getAllRatingAndReviews, getRatingAndReviewCourse } from '../services/operations/ratingAndReviewApi';
 
 const CourseDetails = () => {
 
@@ -32,14 +31,15 @@ const CourseDetails = () => {
     const [confirmationModal, setConfirmationModal] = useState(null);
 
     const [courseData, setCourseData] = useState(null);
-    
+    const [reviewCards, setReviewCards] = useState([]);
 
     useEffect(() => {
         const getFullCourseDetails = async () => {
             try {
                 const result = await fetchCourseDetails(courseId, token);
-                // console.log("Result", result)
+                console.log("Result", result)
                 setCourseData(result);
+                setReviewCards(result?.courseDetails?.ratingAndReviews);
             } catch (err) {
                 console.log(err);
             }
@@ -110,7 +110,8 @@ const CourseDetails = () => {
     if (!courseData.success) {
         return <div>Something went wrong</div>
     }
-
+    console.log("ReviewCards", reviewCards);
+    
     const {
         _id:course_id,
         title,
@@ -196,9 +197,9 @@ const CourseDetails = () => {
                                         </button>
                                     <div className={`${isActive.includes(section._id) ? "flex flex-col gap-1" : "hidden"} bg-richblack-900 gap-5 px-4 py-4 font-bold`}>
                                         {
-                                            section?.subSection?.map((sub)=> {
+                                            section?.subSection?.map((sub, index)=> {
                                                 return (
-                                                    <div className='flex items-center gap-2 '>
+                                                    <div className='flex items-center gap-2 ' key={index}>
                                                         <div className='text-yellow-50'>
                                                             <IoIosVideocam />
                                                         </div>
@@ -223,14 +224,14 @@ const CourseDetails = () => {
                         {instructor?.additionalDetails?.about}
                     </div>
                 </div>
-                <div>
-                    {
-                        ratingAndReviews?.length > 0 && <div>
-                            <p>Reviews from Other Learners</p>
-                            <ReviewSlider></ReviewSlider>
-                        </div> 
-                    }
-                </div>
+            </div>
+            <div className='w-10/12 mx-auto items-center'>
+                {
+                    ratingAndReviews?.length > 0 && <div>
+                        <p className='text-3xl font-bold my-10 text-richblack-5'>Reviews from Other Learners</p>
+                        <ReviewSlider cards={reviewCards}></ReviewSlider>
+                    </div> 
+                }
             </div>
             <div className='w-10/12 mx-auto'>
                 {/* {

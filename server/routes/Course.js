@@ -75,7 +75,7 @@ router.post("/getCategoryPageDetails", categoryPageDetails)
 router.post("/createRating", auth, isStudent, createRating)
 router.post("/getAverageRating", getAverageRating)
 router.get("/getReviews", getAllRatingAndReviews)
-router.get("/rating/course:id", ratingNreviewsCourse)
+router.get("/rating/:courseId", ratingNreviewsCourse)
 
 router.post("/updateCourseProgress", auth, isStudent,updateCourseProgress);
 

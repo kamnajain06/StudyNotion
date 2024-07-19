@@ -164,7 +164,17 @@ exports.getFullCourseDetails = async (req, res) => {
                 },
             })
             .populate("category")
-            .populate("ratingAndReviews")
+            .populate({
+                path: "ratingAndReviews",
+                populate: [
+                    {
+                        path: "user",
+                    },
+                    {
+                        path: "course",
+                    }
+                ]
+            })
             .populate({
                 path: "courseContent",
                 populate: {
@@ -205,6 +215,7 @@ exports.getFullCourseDetails = async (req, res) => {
             totalDuration
         })
     } catch (err) {
+        console.log("Error", err);
         return res.status(403).json({
             success: false,
             message: "Couldn't fetch Course",

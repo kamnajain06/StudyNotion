@@ -71,4 +71,26 @@ export const getAllRatingAndReviews = async () => {
     toast.dismiss(toastId);
     return;
 }
+export const getRatingAndReviewCourse = async (courseId) => {
+    const toastId = toast.loading("Loading...")
+    try {
+        const response = await apiConnector("GET", ratingNreviewEndpoints.GET_RATINGS_FOR_A_COURSE, {
+            courseId: courseId,
+        });
+        console.log("Response", response);
+        if (!response) {
+            throw new Error("Error while fetching Rating and Reviews");
+        }
+        console.log("Rating and Reviews fetched successfully", response);
+        // toast.success("Rating and Reviews fetched successfully");
+        toast.dismiss(toastId);
+        return response;
+    } catch (error) {
+        toast.error("Error while fetching Rating and Reviews");
+        console.log("Error while fetching Rating and Reviews", error);
+    }
+    toast.dismiss(toastId);
+    return;
+
+}
 

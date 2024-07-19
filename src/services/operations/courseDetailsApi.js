@@ -46,7 +46,7 @@ export const getAllCourses = (setCourse) => {
 }
 export const fetchInstructorCourses = async (token) => {
     let result = []
-    const toastId = toast.loading("Loading...")
+    // const toastId = toast.loading("Loading...")
     try {
         const response = await apiConnector(
             "GET",
@@ -67,12 +67,12 @@ export const fetchInstructorCourses = async (token) => {
         console.log("INSTRUCTOR COURSES API ERROR............", error)
         toast.error(error.message)
     }
-    toast.dismiss(toastId)
+    // toast.dismiss(toastId)
     return result
 }
 export const fetchOtherInstructorCourses = async (courseId) => {
     let result = [];
-    const toastId = toast.loading("Loading...");
+    // const toastId = toast.loading("Loading...");
     // console.log("course Id", courseId)
     try {
         const response = await apiConnector(
@@ -91,11 +91,11 @@ export const fetchOtherInstructorCourses = async (courseId) => {
         console.log("OTHER INSTRUCTOR COURSES API ERROR............", error)
         toast.error(error.message)
     }
-    toast.dismiss(toastId);
+    // toast.dismiss(toastId);
     return result;
 }
 export const fetchCourseDetails = async (courseId) => {
-    const toastId = toast.loading("Loading...")
+    // const toastId = toast.loading("Loading...")
     //   dispatch(setLoading(true));
     let result = null
     try {
@@ -113,13 +113,13 @@ export const fetchCourseDetails = async (courseId) => {
         result = error.response.data
         // toast.error(error.response.data.message);
     }
-    toast.dismiss(toastId)
+    // toast.dismiss(toastId)
     //   dispatch(setLoading(false));
     return result
 }
 export const fetchViewCourseDetails = async (courseId, token) => {
     console.log("Course Id", courseId)
-    const toastId = toast.loading("Loading...")
+    // const toastId = toast.loading("Loading...")
     let result = null
     try {
         const response = await apiConnector("POST", GET_VIEW_COURSE_DETAILS, { courseId }, {
@@ -136,7 +136,7 @@ export const fetchViewCourseDetails = async (courseId, token) => {
         result = error.response.data
         // toast.error(error.response.data.message);
     }
-    toast.dismiss(toastId)
+    // toast.dismiss(toastId)
     return result;
 
 }
