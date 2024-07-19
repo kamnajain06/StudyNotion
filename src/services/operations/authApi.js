@@ -19,15 +19,15 @@ export const sendOtp = (email, navigate) => {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...");
         console.log('1');
-        dispatch(setLoading(true));
+        // dispatch(setLoading(true));
         console.log('2');
         try {
             const response = await apiConnector("POST", SENDOTP_API, {
                 email,
                 checkUserPresent: true,
             })
-            console.log("SendOtp API response >>>", response);
-            console.log(response.data.success);
+            // console.log("SendOtp API response >>>", response);
+            // console.log(response.data.success);
             if (!response.data.success) {
                 throw new Error(response.data.message);
             }
@@ -42,14 +42,14 @@ export const sendOtp = (email, navigate) => {
             }
         }
         toast.dismiss(toastId);
-        dispatch(setLoading(false));
+        // dispatch(setLoading(false));
     }
 }
 
 export const signup = (firstName, lastName, email, password, confirmPassword, accountType, otp, navigate) => {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...");
-        dispatch(setLoading(true));
+        // const toastId = toast.loading("Loading...");
+        // dispatch(setLoading(true));
         try {
             const response = await apiConnector("POST", SIGNUP_API, {
                 firstName, lastName, email, password, confirmPassword, accountType, otp
@@ -58,16 +58,16 @@ export const signup = (firstName, lastName, email, password, confirmPassword, ac
             console.log(response.data.success);
             if (!response.data.success) {
                 dispatch(setLoading(false));
-                toast.dismiss(toastId);
+                // toast.dismiss(toastId);
                 return toast.error(response.data.message);
             }
-            toast.dismiss(toastId);
+            // toast.dismiss(toastId);
             dispatch(setLoading(false))
             toast.success("Signup Successful");
             navigate("/login");
         } catch (err) {
-            dispatch(setLoading(false))
-            toast.dismiss(toastId);
+            // dispatch(setLoading(false))
+            // toast.dismiss(toastId);
             console.log("Signup API ERROR............", err)
             if (!err.response) {
                 toast.error(err.message);
